@@ -30,10 +30,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 var index = require('./routes/index');
 var api = require('./routes/api');
 var foulinput = require('./routes/foulinput');
+var gameinput = require('./routes/gameinput');
 
 app.use('/', index);
 app.use('/api', api);
 app.use('/fouls', foulinput);
+app.use('/games', gameinput);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,47 +1,104 @@
-<form action="api/fouls" method="post">
+<form class="form-horizontal" action="api/fouls" method="post">
   <div class="form-group">
-    <label for="quarter">Quarter</label>
-    <input type="text" class="form-control" id="quarter" name="quarter" placeholder="Quarter">
+    <label class="col-sm-2 control-label" for="quarter">Quarter</label>
+      <div class="col-sm-2">
+        <select class="form-control" id="quarter" name="quarter">
+          <option value=""></option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">OT</option>
+        </select>
+      </div>
+    <label class="col-sm-2 control-label" for="time">Time</label>
+    <div class="col-sm-2">
+        <input type="text" class="form-control" id="time" name="time" placeholder="Time">
+    </div>
   </div>
   <div class="form-group">
-    <label for="time">Time</label>
-    <input type="text" class="form-control" id="time" name="time" placeholder="Time">
+    <label class="col-sm-2 control-label" for="foulingTeam">Fouling team</label>
+    <div class="col-sm-2">
+      <label class="radio-inline">
+        <input type="radio" id="foulingTeam" name="homeTeam" value="true"> Home
+      </label>
+      <label class="radio-inline">
+        <input type="radio" id="foulingTeam" name="homeTeam" value="false"> Visitor
+      </label>
+    </div>
+    <label class="col-sm-2 control-label" for="foul">Foul</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="foul" name="foul" placeholder="Foul">
+    </div>
   </div>
   <div class="form-group">
-    <label for="homeTeam">Fouling team</label>
-    <input type="text" class="form-control" id="team" name="homeTeam" placeholder="Team">
+    <label class="col-sm-2 control-label" for="odrk">O/D/R/K</label>
+      <div class="col-sm-2">
+        <select class="form-control" id="odrk" name="odrk">
+          <option value=""></option>
+          <option value="0">Offense</option>
+          <option value="1">Defense</option>
+          <option value="2">Receivers</option>
+          <option value="3">Kickers</option>
+        </select>
+      </div>
+    <label class="col-sm-2 control-label" for="player">Player #</label>
+    <div class="col-sm-2">
+        <input type="text" class="form-control" id="player" name="player" placeholder="Player">
+    </div>
   </div>
   <div class="form-group">
-    <label for="foul">Foul</label>
-    <input type="text" class="form-control" id="foul" name="foul" placeholder="Foul">
+    <label class="col-sm-2 control-label" for="ado">A/D/O</label>
+      <div class="col-sm-2">
+        <select class="form-control" id="ado" name="ado">
+          <option value=""></option>
+          <option value="0">Accepted</option>
+          <option value="1">Declined</option>
+          <option value="2">Offset</option>
+        </select>
+      </div>
+    <label class="col-sm-2 control-label" for="officials">Officials</label>
+    <div class="col-sm-3">
+      <label class="checkbox-inline">
+        <input type="checkbox" id="officials" name="officials" value="R"> R
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="officials" name="officials" value="U"> U
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="officials" name="officials" value="H"> H
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="officials" name="officials" value="L"> L
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="officials" name="officials" value="F"> F
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="officials" name="officials" value="S"> S
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="officials" name="officials" value="B"> B
+      </label>
+    </div>
   </div>
   <div class="form-group">
-    <label for="odrk">O/D/R/K</label>
-    <input type="text" class="form-control" id="odrk" name="odrk" placeholder="Offense, Defense, Receivers, Kickers">
+    <label class="col-sm-2 control-label" for="comment">Comment</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="comment" name="comment" placeholder="Comment">
+    </div>
+    <label class="col-sm-2 control-label" for="evaluatorComment">Evaluator Comment</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="evaluatorComment" name="evaluatorComment" placeholder="Evaluator Comment">
+    </div>
   </div>
   <div class="form-group">
-    <label for="player">Player #</label>
-    <input type="text" class="form-control" id="player" name="player" placeholder="Player">
+    <label class="col-sm-2 control-label" for="supervisorComment">Supervisor Comment</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="supervisorComment" name="supervisorComment" placeholder="Supervisor Comment">
+    </div>
+    <div class="col-sm-2">
+      <button type="submit" class="btn btn-success">Enter foul</button>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="ado">Quarter</label>
-    <input type="text" class="form-control" id="ado" name="ado" placeholder="Accepted, Declined, Offset">
-  </div>
-  <div class="form-group">
-    <label for="officials">Officials</label>
-    <input type="text" class="form-control" id="officials" name="officials" placeholder="Officials">
-  </div>
-  <div class="form-group">
-    <label for="comment">Comment</label>
-    <input type="text" class="form-control" id="comment" name="comment" placeholder="Comment">
-  </div>
-  <div class="form-group">
-    <label for="evaluatorComment">Evaluator Comment</label>
-    <input type="text" class="form-control" id="evaluatorComment" name="evaluatorCOmment" placeholder="Evaluator Comment">
-  </div>
-  <div class="form-group">
-    <label for="quarter">Supervisor Comment</label>
-    <input type="text" class="form-control" id="supervisorComment" name="supervisorComment" placeholder="Supervisor Comment">
-  </div>
-  <button type="submit" class="btn btn-success">Enter foul</button>
 </form>
