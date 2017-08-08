@@ -12,5 +12,6 @@ module.exports = mongoose.model('Foul', {
     officials: [String],
     comment: String,
     evaluatorComment: String,
-    supervisorComment: String
+    supervisorComment: String,
+    game: {type: Schema.Types.ObjectId, ref: 'Game'}
 });

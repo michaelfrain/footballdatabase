@@ -23,6 +23,7 @@ router.route('/fouls')
     newFoul.comment = req.body.comment;
     newFoul.evaluatorComment = req.body.evaluatorComment;
     newFoul.supervisorComment = req.body.supervisorComment;
+    newFoul.game = req.body.game;
     
     newFoul.save(function(err) {
         if (err) {
