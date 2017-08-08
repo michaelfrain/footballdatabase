@@ -43,17 +43,24 @@ router.route('/games')
 .post(function(req, res, next) {
     var newGame = new Game();
     
-    newGame.date = req.body.date;
+    var date = Date.parse(req.body.date);
+    console.log(date);
+    if (isNaN(date)) {
+        newGame.date = Date.now();
+    } else {
+        newGame.date = date;
+    }
     newGame.home = req.body.home;
     newGame.visitor = req.body.visitor;
     newGame.hScore = req.body.hScore;
     newGame.vScore = req.body.vScore;
-    newGame.overtime = req.body.overtime;
+    newGame.overtime = req.body.nOvertimes > 0;
     newGame.nOvertimes = req.body.nOvertimes;
     newGame.totalTime = req.body.totalTime;
     newGame.television = req.body.television;
     newGame.conference = req.body.conference;
-    newGame.officials = req.body.officials;
+    newGame.officials = [req.body.officials];
+    newGame.fouls = [];
     
     newGame.save(function(err) {
         if (err) {
@@ -63,6 +70,6 @@ router.route('/games')
         console.log('Game created with id: ' + newGame.id);
         res.json(newGame);
     })
-})
+});
 
 module.exports = router;

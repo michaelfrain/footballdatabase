@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Foul = 
 
 module.exports = mongoose.model('Game', {
     id: String,
@@ -12,5 +13,6 @@ module.exports = mongoose.model('Game', {
     totalTime: Number,
     television: Boolean,
     conference: String,
-    officials: [String]
+    officials: [String],
+    fouls: [{ type: Schema.Types.ObjectId, ref: 'Foul' }]
 });
