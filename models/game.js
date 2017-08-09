@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Foul = 
+var Schema = mongoose.Schema;
 
 module.exports = mongoose.model('Game', {
     id: String,

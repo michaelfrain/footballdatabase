@@ -1,5 +1,5 @@
-<script src='./javascripts/gameinput.js'></script>
-<form class="form-horizontal" action="api/fouls" method="post">
+<script src='./javascripts/foulinput.js'></script>
+<form class="form-horizontal" action="api/fouls" method="post" id="newfoul">
   <div class="form-group">
     <label class="col-sm-2 control-label" for="game">Game</label>
     <div class="col-sm-2">
@@ -107,7 +107,7 @@
       <input type="text" class="form-control" id="supervisorComment" name="supervisorComment" placeholder="Supervisor Comment">
     </div>
     <div class="col-sm-2">
-      <button type="submit" class="btn btn-success">Enter foul</button>
+      <button type="submit" class="btn btn-success" id="putfoul">Enter foul</button>
     </div>
   </div>
 </form>

@@ -73,4 +73,32 @@ router.route('/games')
     })
 });
 
+router.route('/games/:gameId')
+.get(function(req, res, next) {
+    Game.findById(req.params.gameId, function(err, game) {
+        if (err) {
+            console.log('Could not find game id: ' + req.params.gameId);
+            throw err;
+        }
+        res.json(game);
+    });
+})
+.put(function(req, res, next) {
+    Game.findById(req.params.gameId, function(err, game) {
+        if (err) {
+            console.log('Could not find game id for put: ' + req.params.gameId);
+            throw err;
+        }
+        game.fouls.push(req.body.foul.id);
+        game.save(function(err) {
+            if (err) {
+                console.log('Error updating game: ' + err);
+                throw err;
+            }
+            console.log('Game updated with id: ' + game.id);
+            res.json(game);
+        });
+    });
+});
+
 module.exports = router;
