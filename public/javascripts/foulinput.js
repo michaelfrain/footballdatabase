@@ -8,17 +8,27 @@ $(document).ready(function() {
     });
     
     $('#putfoul').click(function() {
-        var data = $('#newfoul').serializeArray();
+        var data = $('#newfoul').serializeJSON();
         var selectedGame = $('#game').val();
         $.ajax({
-            url: "/api/games/"+selectedGame
-        }).then(function(gameData) {
-            if (gameData) {
-                gameData.fouls.push(data[0].value);
-            }
+            url: "/api/fouls",
+            type: "POST",
+            content: 'application/json',
+            data: data
+        }).then(function(foulData){
             $.ajax({
-                url: "/api/games/"+selectedGame,
-                type: "PUT"
+                url: "/api/games/"+selectedGame
+            }).then(function(gameData) {
+                if (gameData) {
+                    gameData.fouls.push(foulData.id);
+                    var stringData = JSON.stringify(gameData);
+                }
+                $.ajax({
+                    url: "/api/games/"+selectedGame,
+                    type: "PUT",
+                    content: 'application/json',
+                    data: stringData
+                });
             });
         });
     });

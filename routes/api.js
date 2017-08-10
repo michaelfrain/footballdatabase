@@ -89,13 +89,13 @@ router.route('/games/:gameId')
             console.log('Could not find game id for put: ' + req.params.gameId);
             throw err;
         }
-        game.fouls.push(req.body.foul.id);
+        game.fouls.push(req.body.id);
         game.save(function(err) {
             if (err) {
                 console.log('Error updating game: ' + err);
                 throw err;
             }
-            console.log('Game updated with id: ' + game.id);
+            console.log('Game updated with id: ' + req.body.id);
             res.json(game);
         });
     });
