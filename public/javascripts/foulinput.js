@@ -9,24 +9,25 @@ $(document).ready(function() {
     
     $('#putfoul').click(function() {
         var data = $('#newfoul').serializeJSON();
+        var foulString = JSON.stringify(data);
         var selectedGame = $('#game').val();
         $.ajax({
             url: "/api/fouls",
             type: "POST",
-            content: 'application/json',
-            data: data
+            contentType: "application/json",
+            data: foulString
         }).then(function(foulData){
             $.ajax({
                 url: "/api/games/"+selectedGame
             }).then(function(gameData) {
                 if (gameData) {
-                    gameData.fouls.push(foulData.id);
+                    gameData.fouls.push(foulData._id);
                     var stringData = JSON.stringify(gameData);
                 }
                 $.ajax({
                     url: "/api/games/"+selectedGame,
                     type: "PUT",
-                    content: 'application/json',
+                    contentType: 'application/json',
                     data: stringData
                 });
             });

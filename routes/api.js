@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Foul = require('../models/foul');
 var Game = require('../models/game');
+var User = require('../models/user');
 
 router.route('/fouls')
 .get(function(req, res, next) {
@@ -30,7 +31,7 @@ router.route('/fouls')
             console.log('Error saving foul: ' + err);
             throw err;
         }
-        console.log('Foul created with id: ' + newFoul.id);
+        console.log('Foul created with id: ' + newFoul._id);
         res.json(newFoul);
     });
 });
@@ -61,14 +62,13 @@ router.route('/games')
     newGame.television = req.body.television;
     newGame.conference = req.body.conference;
     newGame.officials = [req.body.officials];
-    newGame.fouls = [];
     
     newGame.save(function(err) {
         if (err) {
             console.log('Error saving game: ' + err);
             throw err;
         }
-        console.log('Game created with id: ' + newGame.id);
+        console.log('Game created with id: ' + newGame._id);
         res.json(newGame);
     })
 });
@@ -89,15 +89,38 @@ router.route('/games/:gameId')
             console.log('Could not find game id for put: ' + req.params.gameId);
             throw err;
         }
-        game.fouls.push(req.body.id);
+        game.fouls = req.body.fouls;
         game.save(function(err) {
             if (err) {
                 console.log('Error updating game: ' + err);
                 throw err;
             }
-            console.log('Game updated with id: ' + req.body.id);
+            console.log('Game updated with id: ' + game._id);
             res.json(game);
         });
+    });
+});
+
+router.route('/users')
+.get(function(req, res, next) {
+    User.find({}, function(err, users) {
+        res.json(users);
+    })
+})
+.post(function(req, res, next) {
+    var newUser = new User();
+    
+    newUser.firstName = req.body.firstName;
+    newUser.lastName = req.body.lastName;
+    newUser.role = req.body.role;
+    
+    newUser.save(function(err) {
+        if (err) {
+            console.log('Error saving user: ' + err);
+            throw err;
+        }
+        console.log('User created with id: ' + newUser._id);
+        res.json(newUser);
     });
 });
 
