@@ -16,7 +16,7 @@ $(document).ready(function() {
     
     $('#postgame').click(function () {
         var data = $('#newgame').serializeJSON();
-        var officials = [$('#referee').val(), $('#umpire').val()/*, $('#headlines').val(), $('#linejudge').val(), $('#fieldjudge').val(), $('#sidejudge').val(), $('#backjudge').val(), $('#observer').val()*/];
+        var officials = [$('#referee').val(), $('#umpire').val(), $('#headlines').val(), $('#linejudge').val(), $('#fieldjudge').val(), $('#sidejudge').val(), $('#backjudge').val(), $('#observer').val()];
         data.officials = officials;
         var dataString = JSON.stringify(data);
         $.ajax({
