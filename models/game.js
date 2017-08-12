@@ -13,6 +13,6 @@ module.exports = mongoose.model('Game', {
     totalTime: Number,
     television: Boolean,
     conference: String,
-    officials: [String],
+    officials: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     fouls: [{ type: Schema.Types.ObjectId, ref: 'Foul' }]
 });

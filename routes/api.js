@@ -61,7 +61,7 @@ router.route('/games')
     newGame.totalTime = req.body.totalTime;
     newGame.television = req.body.television;
     newGame.conference = req.body.conference;
-    newGame.officials = [req.body.officials];
+    newGame.officials = req.body.officials;
     
     newGame.save(function(err) {
         if (err) {

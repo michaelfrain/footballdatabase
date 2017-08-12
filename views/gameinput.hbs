@@ -1,4 +1,5 @@
-<form class="form-horizontal" action="api/games" method="post">
+<script src='./javascripts/gameinput.js'></script>
+<form class="form-horizontal" action="api/games" method="post" id="newgame">
   <div class="form-group">
     <label class="col-sm-2 control-label" for="date">Date</label>
     <div class="col-sm-2">
@@ -44,12 +45,64 @@
     </div>
   </div>
   <div class="form-group">
-    <label class="col-sm-2 control-label" for="officials">Officials</label>
+    <label class="col-sm-2 control-label" for="referee">Referee</label>
+      <div class="col-sm-2">
+        <select class="form-control" id="referee" name="referee:skip">
+          <option value=""></option>
+        </select>
+      </div>
+    <label class="col-sm-2 control-label" for="umpire">Umpire</label>
+      <div class="col-sm-2">
+        <select class="form-control" id="umpire" name="umpire:skip">
+          <option value=""></option>
+        </select>
+      </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="headlines">Head Linesman</label>
+      <div class="col-sm-2">
+        <select class="form-control" id="headlines" name="headlines:skip">
+          <option value=""></option>
+        </select>
+      </div>
+    <label class="col-sm-2 control-label" for="linejudge">Line Judge</label>
+      <div class="col-sm-2">
+        <select class="form-control" id="linejudge" name="linejudge:skip">
+          <option value=""></option>
+        </select>
+      </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="fieldjudge">Field Judge</label>
+      <div class="col-sm-2">
+        <select class="form-control" id="fieldjudge" name="fieldjudge:skip">
+          <option value=""></option>
+        </select>
+      </div>
+    <label class="col-sm-2 control-label" for="sidejudge">Side Judge</label>
+      <div class="col-sm-2">
+        <select class="form-control" id="sidejudge" name="sidejudge:skip">
+          <option value=""></option>
+        </select>
+      </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="backjudge">Back Judge</label>
+      <div class="col-sm-2">
+        <select class="form-control" id="backjudge" name="backjudge:skip">
+          <option value=""></option>
+        </select>
+      </div>
+    <label class="col-sm-2 control-label" for="observer">Observer</label>
+      <div class="col-sm-2">
+        <select class="form-control" id="observer" name="observer:skip">
+          <option value=""></option>
+        </select>
+      </div>
+  </div>
+  <div class="form-group">
     <div class="col-sm-2">
-      <input type="text" class="form-control" id="officials" name="officials" placeholder="Officials">
-    </div>
-    <div class="col-sm-2">
-      <button type="submit" class="btn btn-success">Enter game</button>
+      <button type="button" class="btn btn-success" id="postgame">Enter game</button>
     </div>
   </div>
 </form>
