@@ -14,6 +14,12 @@ $(document).ready(function() {
         }
     });
     
+    $.ajax({
+        url: "/api/games"
+    }).then(function(data) {
+        console.log(data);
+    });
+    
     $('#postgame').click(function () {
         var data = $('#newgame').serializeJSON();
         var officials = [$('#referee').val(), $('#umpire').val(), $('#headlines').val(), $('#linejudge').val(), $('#fieldjudge').val(), $('#sidejudge').val(), $('#backjudge').val(), $('#observer').val()];

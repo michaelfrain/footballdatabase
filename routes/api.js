@@ -38,9 +38,9 @@ router.route('/fouls')
 
 router.route('/games')
 .get(function(req, res, next) {
-    Game.find({}, function(err, games) {
+    Game.find({}).populate('Foul').exec(function(err, games) {
         res.json(games);
-    })
+    });
 })
 .post(function(req, res, next) {
     var newGame = new Game();
