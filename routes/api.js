@@ -6,9 +6,44 @@ var User = require('../models/user');
 
 router.route('/fouls')
 .get(function(req, res, next) {
-    Foul.find({}, function(err, fouls) {
-        res.json(fouls);
-    });
+    if (req.query.user != {}) {
+        var user = req.query.user;
+        var fouls = [];
+        Game.find({ officials : user }, function(err, games) {
+            var gamesChecked = 0;
+            for(var i = 0; i < games.length; i++) {
+                var game = games[i];
+                var positionIndex = game.officials.indexOf(user);
+                var position = "";
+                if (positionIndex == 0) {
+                    position = "R";
+                } else if (positionIndex == 1) {
+                    position = "U";
+                } else if (positionIndex == 2) {
+                    position = "H";
+                } else if (positionIndex == 3) {
+                    position = "L";
+                } else if (positionIndex == 4) {
+                    position = "F";
+                } else if (positionIndex == 5) {
+                    position = "S";
+                } else if (positionIndex == 6) {
+                    position = "B";
+                }
+                Foul.find({ officials : position }, function(err, currentFouls) {
+                    fouls.push.apply(fouls, currentFouls);
+                    gamesChecked++;
+                    if (gamesChecked == games.length) {
+                        res.json(fouls);
+                    }
+                });
+            }
+        });
+    } else {
+        Foul.find({}, function(err, fouls) {
+            res.json(fouls);
+        });
+    }
 })
 .post(function(req, res, next) {
     var newFoul = new Foul();

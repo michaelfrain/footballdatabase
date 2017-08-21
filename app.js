@@ -32,15 +32,17 @@ var api = require('./routes/api');
 var foulinput = require('./routes/foulinput');
 var gameinput = require('./routes/gameinput');
 var userinput = require('./routes/userinput');
+var foulsearch = require('./routes/foulsearch');
 
 app.use('/', index);
 app.use('/api', api);
 app.use('/fouls', foulinput);
 app.use('/games', gameinput);
 app.use('/users', userinput);
+app.use('/foulsearch', foulsearch);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
