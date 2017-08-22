@@ -30,12 +30,14 @@ router.route('/fouls')
                 } else if (positionIndex == 6) {
                     position = "B";
                 }
-                Foul.find({ officials : position }, function(err, currentFouls) {
-                    fouls.push.apply(fouls, currentFouls);
-                    gamesChecked++;
-                    if (gamesChecked == games.length) {
-                        res.json(fouls);
-                    }
+                Foul.find({ officials : position })
+                    .populate('game')
+                    .exec(function(err, currentFouls) {
+                      fouls.push.apply(fouls, currentFouls);
+                      gamesChecked++;
+                      if (gamesChecked == games.length) {
+                          res.json(fouls);
+                      }
                 });
             }
         });

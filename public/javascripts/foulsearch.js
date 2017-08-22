@@ -14,7 +14,7 @@ $(document).ready(function() {
         }).then(function(data) {
             if (data) {
               for (var i=0; i<data.length; i++) {
-                $('#foulelement').append('<tr><td>'+data[i].game+'</td><td>'+data[i].quarter+'</td><td>'+data[i].time+'</td><td>'+data[i].foul+'</td></tr>');
+                $('#foulelement').append('<tr><td>'+data[i].game.home+' vs. '+data[i].game.visitor+'</td><td>'+data[i].quarter+'</td><td>'+data[i].time+'</td><td>'+data[i].foul+'</td></tr>');
               }
               $('table').css("display", "inline");
             }
