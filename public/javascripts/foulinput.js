@@ -6,6 +6,14 @@ $(document).ready(function() {
             $('#game').append('<option value="'+data[i]._id+'">'+data[i].home+' vs. '+data[i].visitor+'</option>');
         }
     });
+  
+    $.ajax({
+        url: "api/grades"
+    }).then(function(data) {
+        for (var i=0; i< data.length; i++) {
+            $('#grade').append('<option value="'+data[i]._id+'">'+data[i].grade+'</option>');
+        }
+    });
     
     $('#putfoul').click(function() {
         var data = $('#newfoul').serializeJSON();

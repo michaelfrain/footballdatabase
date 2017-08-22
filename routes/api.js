@@ -3,6 +3,7 @@ var router = express.Router();
 var Foul = require('../models/foul');
 var Game = require('../models/game');
 var User = require('../models/user');
+var Grade = require('../models/grade');
 
 router.route('/fouls')
 .get(function(req, res, next) {
@@ -136,6 +137,13 @@ router.route('/games/:gameId')
             res.json(game);
         });
     });
+});
+
+router.route('/grades')
+.get(function(req, res, next) {
+    Grade.find({}, function(err, grades) {
+        res.json(grades);
+    })
 });
 
 router.route('/users')
