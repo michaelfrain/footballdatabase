@@ -7,7 +7,7 @@ var Grade = require('../models/grade');
 
 router.route('/fouls')
 .get(function(req, res, next) {
-    if (req.query.user != {}) {
+    if (req.query.user != undefined) {
         var user = req.query.user;
         var fouls = [];
         Game.find({ officials : user }, function(err, games) {
@@ -41,6 +41,11 @@ router.route('/fouls')
                       }
                 });
             }
+        });
+    } else if (req.query.game != undefined) {
+        var game = req.query.game;
+        Game.findOne({ _id : game }).populate('fouls').exec(function(err, selectedGame) {
+            res.json(selectedGame);
         });
     } else {
         Foul.find({}, function(err, fouls) {

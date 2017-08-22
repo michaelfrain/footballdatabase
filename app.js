@@ -33,6 +33,7 @@ var foulinput = require('./routes/foulinput');
 var gameinput = require('./routes/gameinput');
 var userinput = require('./routes/userinput');
 var foulsearch = require('./routes/foulsearch');
+var foulreports = require('./routes/foulreports');
 
 app.use('/', index);
 app.use('/api', api);
@@ -40,6 +41,7 @@ app.use('/fouls', foulinput);
 app.use('/games', gameinput);
 app.use('/users', userinput);
 app.use('/foulsearch', foulsearch);
+app.use('/foulreports', foulreports);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

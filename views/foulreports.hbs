@@ -1,0 +1,39 @@
+<link rel='stylesheet' href='/stylesheets/foulreports.css' />
+<script src='./javascripts/foulreports.js'></script>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="gamesearch">Select Game</label>
+      <div class="col-sm-2">
+        <select class="form-control" id="gamesearch" name="gamesearch:skip">
+          <option value=""></option>
+        </select>
+      </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-success" id="gamesearchsubmit">Search for fouls</button>
+    </div>
+  </div>
+</form>
+<br />
+<br />
+<table class="table table-striped" id="foultable">
+  <thead>
+    <tr>
+      <th>Quarter</th>
+      <th>Time</th>
+      <th>Team</th>
+      <th>Foul</th>
+      <th>O/D/R/K</th>
+      <th>Player</th>
+      <th>A/D/O</th>
+      <th>Officials</th>
+      <th>Comment</th>
+      <th>Evaluator Comment</th>
+      <th>Supervisor Comment</th>
+      <th>Grade</th>
+    </tr>
+  </thead>
+  <tbody id="foulelement">
+  </tbody>
+</table>
