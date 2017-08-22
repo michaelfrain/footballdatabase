@@ -1,4 +1,5 @@
-<form class="form-horizontal" action="api/users" method="post">
+<script src='./javascripts/userinput.js'></script>
+<form class="form-horizontal" action="api/users" method="post" id="newuser">
   <div class="form-group">
     <label class="col-sm-2 control-label" for="firstName">First Name</label>
     <div class="col-sm-2">
@@ -22,7 +23,7 @@
   </div>
   <div class="form-group">
     <div class="col-sm-2">
-      <button type="submit" class="btn btn-success">Enter user</button>
+      <button type="button" class="btn btn-success" id="postuser">Enter user</button>
     </div>
   </div>
 </form>
