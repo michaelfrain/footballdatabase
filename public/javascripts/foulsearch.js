@@ -15,11 +15,9 @@ $(document).ready(function() {
             if (data) {
                 for (var i=0; i<data.length; i++) {
                   var team = "";
-                if (data[i].homeTeam == undefined) {
-                  team = "";
-                } else if (data[i].homeTeam == true) {
+                if (data[i].homeTeam == true) {
                   team = "H";
-                } else {
+                } else if (data[i].homeTeam == false) {
                   team = "V";
                 }
                 var grade = "";
