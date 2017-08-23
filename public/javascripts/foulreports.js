@@ -47,6 +47,8 @@ $(document).ready(function() {
                     }
                     $('#foulelement').append('<tr><td>'+fouls[i].quarter+'</td><td>'+fouls[i].time+'</td><td>'+team+'</td><td>'+fouls[i].foul+'</td><td>'+odrk+'</td><td>'+fouls[i].player+'</td><td>'+ado+'</td><td>'+fouls[i].officials+'</td><td>'+fouls[i].comment+'</td><td>'+fouls[i].evaluatorComment+'</td><td>'+fouls[i].supervisorComment+'</td><td>'+grade+'</td></tr>');
               }
+              $('#hometeam').append(data.home);
+              $('#gameinfo').css("display", "inline");
               $('table').css("display", "inline");
             }
         });

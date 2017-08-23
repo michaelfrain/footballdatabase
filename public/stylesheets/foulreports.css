@@ -1,3 +1,7 @@
 .table {
     display: none;
 }
+
+#gameinfo {
+    display: none;
+}
