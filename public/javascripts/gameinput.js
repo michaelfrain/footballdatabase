@@ -15,9 +15,12 @@ $(document).ready(function() {
     });
     
     $.ajax({
-        url: "/api/games"
+        url: "/api/teams"
     }).then(function(data) {
-        console.log(data);
+        for (var i=0; i<data.length; i++) {
+            $('#home').append('<option value="'+data[i]._id+'">'+data[i].school+'</option>');
+            $('#visitor').append('<option value="'+data[i]._id+'">'+data[i].school+'</option>');
+        }
     });
     
     $('#postgame').click(function () {

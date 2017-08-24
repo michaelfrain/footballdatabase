@@ -4,7 +4,30 @@ var Foul = require('../models/foul');
 var Game = require('../models/game');
 var User = require('../models/user');
 var Grade = require('../models/grade');
+var Code = require('../models/foulcode');
+var Team = require('../models/team');
 
+router.route('/foulcodes')
+.get(function(req, res, next) {
+    Code.find({}, function(err, codes) {
+        res.json(codes);
+    })
+})
+.post(function(req, res, next) {
+    var newCode = new Code();
+    
+    newCode.code = req.body.foulcode;
+    newCode.name = req.body.foulname;
+    
+    newCode.save(function(err) {
+        if (err) {
+            console.log('Error saving foul code: ' + err);
+            throw err;
+        }
+        console.log('Saved foul code with id: ' + newCode._id);
+        res.json(newCode);
+    })
+})
 router.route('/fouls')
 .get(function(req, res, next) {
     if (req.query.user != undefined) {
@@ -32,7 +55,10 @@ router.route('/fouls')
                     position = "B";
                 }
                 Foul.find({ officials : position })
-                    .populate('game')
+                    .populate({ path: 'game', populate: {path : 'home'}})
+                    .populate({ path: 'game', populate: {path : 'visitor'}})
+                    .populate('foul')
+                    .populate('grade')
                     .exec(function(err, currentFouls) {
                       fouls.push.apply(fouls, currentFouls);
                       gamesChecked++;
@@ -44,7 +70,7 @@ router.route('/fouls')
         });
     } else if (req.query.game != undefined) {
         var game = req.query.game;
-        Game.findOne({ _id : game }).populate('fouls').exec(function(err, selectedGame) {
+        Game.findOne({ _id : game }).populate({ path: 'fouls', populate: {path : 'foul'}}).populate('home').populate('visitor').populate({path: 'fouls', populate: { path: 'grade' }}).exec(function(err, selectedGame) {
             res.json(selectedGame);
         });
     } else {
@@ -68,6 +94,7 @@ router.route('/fouls')
     newFoul.evaluatorComment = req.body.evaluatorComment;
     newFoul.supervisorComment = req.body.supervisorComment;
     newFoul.game = req.body.game;
+    newFoul.grade = req.body.grade;
     
     newFoul.save(function(err) {
         if (err) {
@@ -81,7 +108,7 @@ router.route('/fouls')
 
 router.route('/games')
 .get(function(req, res, next) {
-    Game.find({}).populate('Foul').exec(function(err, games) {
+    Game.find({}).populate('fouls').populate('home').populate('visitor').exec(function(err, games) {
         res.json(games);
     });
 })
@@ -149,11 +176,61 @@ router.route('/grades')
     Grade.find({}, function(err, grades) {
         res.json(grades);
     })
+})
+.post(function(req, res, next) {
+    var newGrade = new Grade();
+    
+    newGrade.abbreviation = req.body.abbreviation;
+    newGrade.gradeType = req.body.gradeType;
+    newGrade.points = req.body.points;
+    
+    newGrade.save(function(err) {
+        if (err) {
+            console.log('Error saving grade: ' + err);
+            throw err;
+        }
+        console.log('Grade created with id: ' + newGrade._id);
+        res.json(newGrade);
+    })
+});
+
+router.route('/teams')
+.get(function(req, res, next) {
+    Team.find({}, function(err, teams) {
+        teams.sort(function(a,b) {
+            if (a.school > b.school) { return 1; }
+            if (a.school < b.school) { return -1; }
+            return 0;
+        });
+        res.json(teams);
+    })
+})
+.post(function(req, res, next) {
+    var newTeam = new Team();
+    
+    newTeam.school = req.body.school;
+    newTeam.mascot = req.body.mascot;
+    newTeam.lat = req.body.lat;
+    newTeam.lon = req.body.lon;
+    
+    newTeam.save(function(err) {
+        if (err) {
+            console.log('Error saving team: ' + err);
+            throw err;
+        }
+        console.log('Team created with id: ' + newTeam._id);
+        res.json(newTeam);
+    })
 });
 
 router.route('/users')
 .get(function(req, res, next) {
     User.find({}, function(err, users) {
+        users.sort(function(a,b) {
+            if (a.lastName > b.lastName) { return 1; }
+            if (a.lastName < b.lastName) { return -1; }
+            return 0;
+        });
         res.json(users);
     })
 })

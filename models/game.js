@@ -4,8 +4,8 @@ var Schema = mongoose.Schema;
 module.exports = mongoose.model('Game', {
     id: String,
     date: Date,
-    home: String,
-    visitor: String,
+    home: { type: Schema.Types.ObjectId, ref: 'Team' },
+    visitor: { type: Schema.Types.ObjectId, ref: 'Team' },
     hScore: Number,
     vScore: Number,
     overtime: Boolean,

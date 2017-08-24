@@ -34,6 +34,9 @@ var gameinput = require('./routes/gameinput');
 var userinput = require('./routes/userinput');
 var foulsearch = require('./routes/foulsearch');
 var foulreports = require('./routes/foulreports');
+var grades = require('./routes/grades');
+var foulcodes = require('./routes/foulcodes');
+var teams = require('./routes/teaminput');
 
 app.use('/', index);
 app.use('/api', api);
@@ -42,6 +45,9 @@ app.use('/games', gameinput);
 app.use('/users', userinput);
 app.use('/foulsearch', foulsearch);
 app.use('/foulreports', foulreports);
+app.use('/grades', grades);
+app.use('/foulcodes', foulcodes);
+app.use('/teaminput', teams);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

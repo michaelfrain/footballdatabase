@@ -6,7 +6,7 @@ module.exports = mongoose.model('Foul', {
     quarter: Number,
     time: Number,
     homeTeam: Boolean,
-    foul: String,
+    foul: {type: Schema.Types.ObjectId, ref: 'Foulcode'},
     odrk: Number,
     player: Number,
     ado: Number,

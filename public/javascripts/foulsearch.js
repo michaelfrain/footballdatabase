@@ -12,6 +12,7 @@ $(document).ready(function() {
         $.ajax({
             url: "/api/fouls?user="+user
         }).then(function(data) {
+            $('#foulelement').empty();
             if (data) {
                 for (var i=0; i<data.length; i++) {
                   var team = "";
@@ -24,7 +25,7 @@ $(document).ready(function() {
                 if (data[i].grade == undefined) {
                   grade = "";
                 } else {
-                  grade = data[i].grade;
+                  grade = data[i].grade.abbreviation;
                 }
                 var odrk = "";
                 if (data[i].odrk == 0) {
@@ -44,9 +45,11 @@ $(document).ready(function() {
                 } else if (data[i].ado == 2) {
                   ado = "O";
                 }
-                $('#foulelement').append('<tr><td>'+data[i].game.home+' vs. '+data[i].game.visitor+'</td><td>'+data[i].quarter+'</td><td>'+data[i].time+'</td><td>'+team+'</td><td>'+data[i].foul+'</td><td>'+odrk+'</td><td>'+data[i].player+'</td><td>'+ado+'</td><td>'+data[i].officials+'</td><td>'+data[i].comment+'</td><td>'+data[i].evaluatorComment+'</td><td>'+data[i].supervisorComment+'</td><td>'+grade+'</td></tr>');
+                $('#foulelement').append('<tr><td>'+data[i].game.home.school+' vs. '+data[i].game.visitor.school+'</td><td>'+data[i].quarter+'</td><td>'+data[i].time+'</td><td>'+team+'</td><td>'+data[i].foul.code+'</td><td>'+odrk+'</td><td>'+data[i].player+'</td><td>'+ado+'</td><td>'+data[i].officials+'</td><td>'+data[i].comment+'</td><td>'+data[i].evaluatorComment+'</td><td>'+data[i].supervisorComment+'</td><td>'+grade+'</td></tr>');
               }
               $('table').css("display", "inline");
+            } else {
+              $('table').css("display", "none");
             }
         });
     });
