@@ -33,8 +33,9 @@ router.route('/fouls')
     if (req.query.user != undefined) {
         var user = req.query.user;
         var fouls = [];
-        Game.find({ officials : user }, function(err, games) {
-            var gamesChecked = 0;
+        Game.find({ officials : user })
+            .populate({ path: 'fouls', populate: {path : 'foul'}}).populate('home').populate('visitor').populate({path: 'fouls', populate: { path: 'grade' }})
+            .exec(function(err, games) {
             for(var i = 0; i < games.length; i++) {
                 var game = games[i];
                 var positionIndex = game.officials.indexOf(user);
@@ -54,18 +55,25 @@ router.route('/fouls')
                 } else if (positionIndex == 6) {
                     position = "B";
                 }
-                Foul.find({ officials : position })
-                    .populate({ path: 'game', populate: {path : 'home'}})
-                    .populate({ path: 'game', populate: {path : 'visitor'}})
-                    .populate('foul')
-                    .populate('grade')
-                    .exec(function(err, currentFouls) {
-                      fouls.push.apply(fouls, currentFouls);
-                      gamesChecked++;
-                      if (gamesChecked == games.length) {
-                          res.json(fouls);
-                      }
-                });
+                for (var j = 0; j < game.fouls.length; j++) {
+                    if (game.fouls[j].officials.indexOf(position) != -1) {
+                        let currentFoul = game.fouls[j];
+                        fouls.push(currentFoul);  
+                    }
+                }
+            }
+            var populatedFouls = [];
+            for (var k = 0; k < fouls.length; k++) {
+                var currentFoul = fouls[k];
+                var tracker = 0
+                currentFoul.populate('game')
+                           .populate({ path : 'game', populate: [{ path : 'home'}, {path : 'visitor'}]}, function(err, populatedFoul) {
+                    populatedFouls.push(populatedFoul);
+                    tracker++;
+                    if (tracker == fouls.length) {
+                        res.json(populatedFouls);
+                    }
+                }); 
             }
         });
     } else if (req.query.game != undefined) {
