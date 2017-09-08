@@ -9,7 +9,9 @@ var bodyParser = require('body-parser');
 // Connect to main database
 var dbConfig = require('./db');
 var mongoose = require('mongoose');
-mongoose.connect(dbConfig.url);
+mongoose.connect(dbConfig.url, {
+	useMongoClient: true
+});
 
 var app = express();
 
