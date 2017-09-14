@@ -25,6 +25,11 @@ $(document).ready(function() {
     
     $('#putfoul').click(function() {
         var data = $('#newfoul').serializeJSON();
+        var officials = [];
+        $("input[name='officials']:checked").each(function () {
+            officials.push($(this).val());
+        })
+        data.officials = officials;
         var foulString = JSON.stringify(data);
         var selectedGame = $('#game').val();
         $.ajax({
