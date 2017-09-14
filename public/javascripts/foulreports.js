@@ -46,6 +46,7 @@ $(document).ready(function() {
                     } else if (fouls[i].ado == 2) {
                       ado = "O";
                     }
+                    data.fouls.sort(function(a,b) { return a.quarter - b.quarter || b.time - a.time; });
                     $('#foulelement').append('<tr><td>'+fouls[i].quarter+'</td><td>'+fouls[i].time+'</td><td>'+team+'</td><td>'+fouls[i].foul.code+'</td><td>'+odrk+'</td><td>'+fouls[i].player+'</td><td>'+ado+'</td><td>'+fouls[i].officials+'</td><td>'+fouls[i].comment+'</td><td>'+fouls[i].evaluatorComment+'</td><td>'+fouls[i].supervisorComment+'</td><td>'+grade+'</td></tr>');
               }
               $('#hometeam').append(data.home);
