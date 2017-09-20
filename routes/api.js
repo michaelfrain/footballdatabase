@@ -94,7 +94,7 @@ router.route('/fouls')
             res.json(selectedGame);
         });
     } else {
-        Foul.find({}, function(err, fouls) {
+        Foul.find({}).populate('foul').populate('grade').populate({ path: 'game', populate: {path : 'home'}}).populate({ path: 'game', populate: { path : 'visitor'}}).exec(function(err, fouls) {
             res.json(fouls);
         });
     }
