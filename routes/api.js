@@ -68,13 +68,25 @@ router.route('/fouls')
                 var tracker = 0
                 currentFoul.populate('game')
                            .populate({ path : 'game', populate: [{ path : 'home'}, {path : 'visitor'}]}, function(err, populatedFoul) {
-                    populatedFouls.push(populatedFoul);
+                    if (req.query.foulcode != undefined) {
+                        var code = req.query.foulcode;
+                        if (code == populatedFoul.foul._id) {
+                            populatedFouls.push(populatedFoul);
+                        }
+                    } else {
+                        populatedFouls.push(populatedFoul);
+                    }
                     tracker++;
                     if (tracker == fouls.length) {
                         res.json(populatedFouls);
                     }
                 }); 
             }
+        });
+    } else if (req.query.foulcode != undefined) {
+        var foulcode = req.query.foulcode;
+        Foul.find({ foul : foulcode }).populate('foul').populate('grade').populate({ path: 'game', populate: {path : 'home'}}).populate({ path: 'game', populate: { path : 'visitor'}}).exec(function(err, fouls) {
+            res.json(fouls);
         });
     } else if (req.query.game != undefined) {
         var game = req.query.game;
@@ -103,6 +115,7 @@ router.route('/fouls')
     newFoul.supervisorComment = req.body.supervisorComment;
     newFoul.game = req.body.game;
     newFoul.grade = req.body.grade;
+    newFoul.hudl = req.body.hudl;
     
     newFoul.save(function(err) {
         if (err) {

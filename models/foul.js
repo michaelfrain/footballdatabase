@@ -15,5 +15,6 @@ module.exports = mongoose.model('Foul', {
     evaluatorComment: String,
     supervisorComment: String,
     game: {type: Schema.Types.ObjectId, ref: 'Game'},
-    grade: {type: Schema.Types.ObjectId, ref: 'Grade'}
+    grade: {type: Schema.Types.ObjectId, ref: 'Grade'},
+    hudl: Number
 });
