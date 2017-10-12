@@ -83,6 +83,7 @@ router.route('/fouls')
                     }
                     tracker++;
                     if (tracker == fouls.length) {
+                        console.log('Get fouls for user called. User = '+req.query.user._id+' / Requester IP = '+req.ip);
                         res.json(populatedFouls);
                     }
                 }); 
@@ -91,15 +92,18 @@ router.route('/fouls')
     } else if (req.query.foulcode != undefined) {
         var foulcode = req.query.foulcode;
         Foul.find({ foul : foulcode }).populate('foul').populate('grade').populate({ path: 'game', populate: {path : 'home'}}).populate({ path: 'game', populate: { path : 'visitor'}}).exec(function(err, fouls) {
+            console.log('Get fouls for foulcode called. Foulcode = '+req.query.foulcode._id+' / Requester IP = '+req.ip);
             res.json(fouls);
         });
     } else if (req.query.game != undefined) {
         var game = req.query.game;
         Game.findOne({ _id : game }).populate({ path: 'fouls', populate: {path : 'foul'}}).populate('home').populate('visitor').populate({path: 'fouls', populate: { path: 'grade' }}).exec(function(err, selectedGame) {
+            console.log('Foul report for game requested. Game = '+req.query.game._id+' / Requester IP = '+req.ip);
             res.json(selectedGame);
         });
     } else {
         Foul.find({}).populate('foul').populate('grade').populate({ path: 'game', populate: {path : 'home'}}).populate({ path: 'game', populate: { path : 'visitor'}}).exec(function(err, fouls) {
+            console.log('All fouls requested. Requester IP = '+req.ip);
             res.json(fouls);
         });
     }
