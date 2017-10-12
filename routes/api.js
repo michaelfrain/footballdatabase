@@ -10,6 +10,11 @@ var Team = require('../models/team');
 router.route('/foulcodes')
 .get(function(req, res, next) {
     Code.find({}, function(err, codes) {
+        codes.sort(function(a,b) {
+            if (a.code > b.code) { return 1; }
+            if (a.code < b.code) { return -1; }
+            return 0;
+        });
         res.json(codes);
     })
 })
