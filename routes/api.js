@@ -281,4 +281,18 @@ router.route('/users')
     });
 });
 
+router.route('/fulldelete')
+.get(function(req, res, next) {
+    var dbConfig = require('./db');
+    var mongoose = require('mongoose');
+    mongoose.connection.db.dropDatabase(function(err, result) {
+        if (err) {
+            console.log('Error dropping database: ' + err);
+            throw err;
+        }
+        console.log('Database dropped!');
+        res.json(result);
+    });
+});
+
 module.exports = router;
