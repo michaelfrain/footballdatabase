@@ -6,7 +6,10 @@ $(document).ready(function() {
             url: "/api/teams",
             type: "POST",
             contentType: "application/json",
-            data: teamString
+            data: teamString,
+            success: function(result) {
+                $( "#result-message" ).html( "Team created!" );
+            }
         });
     });
 });
