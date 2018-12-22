@@ -5,6 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var authModule = require('./auth/localauth');
 
 // Connect to main database
 var dbConfig = require('./db');
@@ -14,6 +15,9 @@ mongoose.connect(dbConfig.url, {
 });
 
 var app = express();
+
+app.use(authModule.initialize());
+app.use(authModule.session());
 
 // view engine setup
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
@@ -69,4 +73,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.post('/login', )
 module.exports = app;

@@ -6,6 +6,7 @@ var User = require('../models/user');
 var Grade = require('../models/grade');
 var Code = require('../models/foulcode');
 var Team = require('../models/team');
+var bCrypt = require('bcrypt-nodejs');
 
 router.route('/foulcodes')
 .get(function(req, res, next) {
@@ -270,6 +271,9 @@ router.route('/users')
     newUser.firstName = req.body.firstName;
     newUser.lastName = req.body.lastName;
     newUser.role = req.body.role;
+    newUser.username = req.body.username;
+    newUser.password = createHash(req.body.password);
+
     
     newUser.save(function(err) {
         if (err) {
@@ -295,3 +299,7 @@ router.route('/fulldelete')
 });
 
 module.exports = router;
+
+var createHash = function(password) {
+    return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+}

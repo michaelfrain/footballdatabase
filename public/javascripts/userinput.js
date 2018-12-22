@@ -1,3 +1,5 @@
+var bCrypt = require('bcrypt-nodejs');
+
 $(document).ready(function() {
     $('#postuser').click(function() {
         var data = $('#newuser').serializeJSON();
